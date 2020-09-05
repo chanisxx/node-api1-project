@@ -8,6 +8,11 @@ let users = [
         id: "example",
         name: "Jane Doe",
         bio: "Not Tarzan's Wife, another Jane"
+    },
+    {
+        id: "example",
+        name: "John Doe",
+        bio: "Jane's Actual Husband"
     }
 ];
 
@@ -98,24 +103,25 @@ server.delete(`/api/users/:id`, (req, res) => {
 server.put('/api/users/:id', (req, res) => {
     const { id } = req.params;
     
-    const changes = req.body;
+    const changes = req.body; // user inputs a change thru the body
 
-    changes.id = id;
+    changes.id = id; // the body's id is being assigned to the id from the URL 
 
-    let index = users.findIndex(user => user.id === id);
+    let index = users.findIndex(user => user.id === id); 
+    // finding the index of the user in the list of users with a specific id
 
-    if(index !== -1) {
-        if(changes.name && changes.bio) {
-            users[index] = changes;
-            if(findUser(id) === changes) {
-                res.status(200).json(users[index]);
-            } else {
+    if(index !== -1) { // CASE 1 if the index variable returns with a user's index
+        if(changes.name && changes.bio) {// CASE 2 if the user inputed a name and bio
+            users[index] = changes;// setting the user with the found index to the changes which is the req.body
+            if(findUser(id) === changes) { // CASE 3 if the user in the original array equals to the changes made
+                res.status(200).json(users[index]); 
+            } else { // CASE 3 if the user in the original array does not equal to the changes made
                 res.status(500).json({errorMessage: "The user information could not be modified."});
             }
-        } else {
+        } else {// CASE 2 if the user did not input a name or bio
             res.status(400).json({errorMessage: "Please provide name and bio for the user."});
         }
-    } else {
+    } else { // CASE 1 if the variable index could not find the user's index by the id
         res.status(404).json({ message: "The user with the specified ID does not exist." });
     }
 })
