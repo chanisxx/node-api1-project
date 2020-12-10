@@ -1,0 +1,46 @@
+h1 {
+  text-align: center;
+}
+
+.container {
+  margin: 3% 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  border: solid rgba(0, 0, 0, 0.144) 1px;
+  min-width: 240px;
+  min-height: 140px;
+  padding: 20px 30px;
+  transition: 0.4s ease-out;
+  box-shadow: 0px 7px 10px rgba(0,0,0,0.60);
+  margin: 30px 0;
+}
+.card:hover {
+  transition: all 0.2s ease-out;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.60);
+  transform: translateY(10px);
+}
+
+.button {
+  cursor: pointer;
+  position: relative;
+  left: 70px;
+  width: 100px;
+  height: 30px;
+  border-radius: 4px;
+  border: none;
+  background-color: #38c7d1de;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 300;
+  }
+  
+.button:hover {
+  background-color: transparent;
+  color: black;
+  border: black 1px solid;
+  transition: all .2s ease-in-out;
+}
